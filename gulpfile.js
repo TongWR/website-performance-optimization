@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var htmlmin = require('gulp-htmlmin');
 
 gulp.task('default', ['html', 'css', 'js', 'images', 'pizza-images'], function() {
 
@@ -6,6 +7,7 @@ gulp.task('default', ['html', 'css', 'js', 'images', 'pizza-images'], function()
 
 gulp.task('html', function() {
   return gulp.src('src/index.html')
+    .pipe(htmlmin({collapseWhitespace: true, removeComments: true, minifyJS: true}))
     .pipe(gulp.dest('dist'));
 });
 
