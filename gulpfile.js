@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
-gulp.task('hello', function() {
-  console.log('Gulp again?');
+gulp.task('default', ['html', 'css', 'js', 'images', 'pizza-images'], function() {
+
 });
 
 gulp.task('html', function() {
@@ -17,4 +17,14 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   return gulp.src('src/js/*.js')
     .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('images', function() {
+  return gulp.src('src/img/*')
+    .pipe(gulp.dest('dist/img'));
+})
+
+gulp.task('pizza-images', function() {
+  return gulp.src('src/views/images/*')
+    .pipe(gulp.dest('dist/views/images'));
 });
