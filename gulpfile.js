@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var htmlmin = require('gulp-htmlmin');
 
-gulp.task('default', ['html', 'css', 'js', 'images', 'pizza-images'], function() {
+gulp.task('default', ['html', 'css', 'js', 'assets'], function() {
 
 });
 
@@ -21,6 +21,10 @@ gulp.task('js', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('assets', ['images', 'pizza-images', 'fonts'], function() {
+
+});
+
 gulp.task('images', function() {
   return gulp.src('src/img/*')
     .pipe(gulp.dest('dist/img'));
@@ -29,4 +33,9 @@ gulp.task('images', function() {
 gulp.task('pizza-images', function() {
   return gulp.src('src/views/images/*')
     .pipe(gulp.dest('dist/views/images'));
+});
+
+gulp.task('fonts', function() {
+  return gulp.src('src/fonts/*')
+    .pipe(gulp.dest('dist/fonts'));
 });
