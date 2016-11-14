@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var htmlmin = require('gulp-htmlmin');
+var inlinesource = require('gulp-inline-source');
 
 gulp.task('default', ['html', 'css', 'js', 'assets'], function() {
 
@@ -7,12 +8,13 @@ gulp.task('default', ['html', 'css', 'js', 'assets'], function() {
 
 gulp.task('html', function() {
   return gulp.src('src/index.html')
+    .pipe(inlinesource())
     .pipe(htmlmin({collapseWhitespace: true, removeComments: true, minifyJS: true}))
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('css', function() {
-  return gulp.src('src/css/*.css')
+  return gulp.src('src/css/print.css')
     .pipe(gulp.dest('dist/css'));
 });
 
