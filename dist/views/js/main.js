@@ -503,9 +503,9 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var scrollTop = document.body.scrollTop;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -518,6 +518,8 @@ function updatePositions() {
     logAverageFrame(timesToUpdatePosition);
   }
 }
+
+var items = document.querySelectorAll('.mover');
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
