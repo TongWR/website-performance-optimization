@@ -40,23 +40,25 @@ gulp.task('images', function() {
     .pipe(gulp.dest('dist/img'));
 })
 
-gulp.task('pizza', function() {
-  return gulp.src('src/views/**/*')
-    .pipe(gulp.dest('dist/views'));
+gulp.task('pizza', ['pizza-html', 'pizza-css', 'pizza-js'], function() {
+
 });
 
 gulp.task('pizza-html', function() {
   return gulp.src('src/views/pizza.html')
+    .pipe(htmlMin({collapseWhitespace: true, removeComments: true, minifyJS: true}))
     .pipe(gulp.dest('dist/views'));
 });
 
 gulp.task('pizza-css', function() {
   return gulp.src('src/views/css/*.css')
+    .pipe(csso())
     .pipe(gulp.dest('dist/views/css'));
 });
 
 gulp.task('pizza-js', function() {
   return gulp.src('src/views/js/*.js')
+    .pipe(uglify())
     .pipe(gulp.dest('dist/views/js'))
 });
 
