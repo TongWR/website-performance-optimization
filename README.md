@@ -16,4 +16,8 @@ Specifically, three main results are achieved:
 ## How to Set Up
 [Gulp](http://gulpjs.com/), a popular task runner, is used to automate HTML/CSS/JS minifications and image optimization.
 
+1. Install [Node](https://nodejs.org), a JavaScript runtime.
+2. Install [npm](https://www.npmjs.com/), a Node package manager.
+3. Install Gulp.
+
 After installing Gulp and downloading this repository, simply go to the directory downloaded and type 'gulp' to run the optimizations. That is code/assets in dist will be re-generated from src folder again.
