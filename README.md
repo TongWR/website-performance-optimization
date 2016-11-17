@@ -5,9 +5,7 @@ This Front-End Web Developer [Nanodegree](https://www.udacity.com/course/front-e
 
 The original source code is in folder src, the optimized code is in dist folder.
 
-## Results
-
-Specifically, three main results are achieved:
+## Summary of Optimization Results:
 
 1. [PageSpeed](https://developers.google.com/speed/pagespeed/insights/) score > 90 for index.html, both for Mobile and Desktop.
 2. Resizing pizzas in pizza.html takes < 5ms.
@@ -25,3 +23,11 @@ Specifically, three main results are achieved:
 7. Run 'gulp'
 
 Code and other assets in dist will be re-generated from src folder again!
+
+## Optimizations in views/js/main.js
+
+1. Access DOM elements of moving pizzas once, not every time updatePositions is called.
+2. Reduce # of DOM elements by calculating # of moving pizzas from window size.
+3. Store upper bound of for loops in variable instead of calculating every time.
+4. Move variable declarations out of for loop.
+5. Replace querySelector/querySelectorAll with getElementById/getElementsByClassName.
