@@ -4,13 +4,19 @@ var inlineSource = require('gulp-inline-source');
 var imageMin = require('gulp-imagemin');
 var del = require('del');
 var runSequence = require('run-sequence');
+var csso = require('gulp-csso');
+var uglify = require('gulp-uglify');
 
 gulp.task('default', function() {
-  runSequence('clean:dist', ['html', 'css', 'js', 'assets']);
+  runSequence('clean:dist', ['index', 'pizza']);
+});
+
+gulp.task('index', ['html', 'css', 'js', 'images', 'fonts'], function() {
+
 });
 
 gulp.task('html', function() {
-  return gulp.src('src/index.html')
+  return gulp.src('src/*.html')
     .pipe(inlineSource())
     .pipe(htmlMin({collapseWhitespace: true, removeComments: true, minifyJS: true}))
     .pipe(gulp.dest('dist'));
@@ -18,16 +24,14 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
   return gulp.src('src/css/print.css')
+    .pipe(csso())
     .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('js', function() {
   return gulp.src('src/js/*.js')
+    .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
-});
-
-gulp.task('assets', ['images', 'pizza-images', 'fonts'], function() {
-
 });
 
 gulp.task('images', function() {
