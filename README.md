@@ -5,10 +5,13 @@ This Front-End Web Developer [Nanodegree](https://www.udacity.com/course/front-e
 
 The original source code is in folder src, the optimized code is in dist folder.
 
+## Results
+
 Specifically, three main results are achieved:
-1) [PageSpeed](https://developers.google.com/speed/pagespeed/insights/) score > 90 for index.html, both for Mobile and Desktop.
-2) Resizing pizzas in pizza.html takes < 5ms.
-3) pizza.html consistently renders at 60FPS or above.
+
+1. [PageSpeed](https://developers.google.com/speed/pagespeed/insights/) score > 90 for index.html, both for Mobile and Desktop.
+2. Resizing pizzas in pizza.html takes < 5ms.
+3. pizza.html consistently renders at 60FPS or above.
 
 ## How to Set Up
 [Gulp](http://gulpjs.com/), a popular task runner, is used to automate HTML/CSS/JS minifications and image optimization.
