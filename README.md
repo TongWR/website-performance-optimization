@@ -24,6 +24,15 @@ The original source code is in folder src, the optimized code is in dist folder.
 
 Code and other assets in dist will be re-generated from src folder again!
 
+## General Optimizations
+1. HTML/CSS/JS are minified.
+2. Images are optimized.
+
+## Optimizations in index.html
+1. Inline render-blocking CSS.
+2. Move inline script from top of page to bottom of page.
+3. Load Google Analytics script asynchronously.
+
 ## Optimizations in views/js/main.js
 
 1. Access DOM elements of moving pizzas once, not every time updatePositions is called.
