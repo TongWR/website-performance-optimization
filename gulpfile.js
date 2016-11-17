@@ -6,6 +6,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var csso = require('gulp-csso');
 var uglify = require('gulp-uglify');
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('default', function() {
   runSequence('clean:dist', ['index', 'pizza']);
@@ -24,6 +25,10 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
   return gulp.src('src/css/print.css')
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+    }))
     .pipe(csso())
     .pipe(gulp.dest('dist/css'));
 });
@@ -52,6 +57,10 @@ gulp.task('pizza-html', function() {
 
 gulp.task('pizza-css', function() {
   return gulp.src('src/views/css/*.css')
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+    }))
     .pipe(csso())
     .pipe(gulp.dest('dist/views/css'));
 });
