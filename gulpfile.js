@@ -40,7 +40,7 @@ gulp.task('images', function() {
     .pipe(gulp.dest('dist/img'));
 })
 
-gulp.task('pizza', ['pizza-html', 'pizza-css', 'pizza-js'], function() {
+gulp.task('pizza', ['pizza-html', 'pizza-css', 'pizza-js', 'pizza-images'], function() {
 
 });
 
