@@ -7,12 +7,13 @@ var runSequence = require('run-sequence');
 var csso = require('gulp-csso');
 var uglify = require('gulp-uglify');
 var autoprefixer = require('gulp-autoprefixer');
+var responsive = require('gulp-responsive');
 
 gulp.task('default', function() {
   runSequence('clean:dist', ['index', 'pizza']);
 });
 
-gulp.task('index', ['html', 'css', 'js', 'images', 'fonts'], function() {
+gulp.task('index', ['html', 'css', 'js', 'images', 'fonts', 'pizza-in-index'], function() {
 
 });
 
@@ -42,6 +43,17 @@ gulp.task('js', function() {
 gulp.task('images', function() {
   return gulp.src('src/img/*')
     .pipe(imageMin())
+    .pipe(gulp.dest('dist/img'));
+})
+
+gulp.task('pizza-in-index', function() {
+  return gulp.src('src/views/images/pizzeria.jpg')
+    .pipe(responsive({
+      'pizzeria.jpg': {
+        width: 100,
+        rename: 'pizzeria-100.jpg'
+      }
+    }))
     .pipe(gulp.dest('dist/img'));
 })
 
