@@ -499,14 +499,15 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-function updatePositions(items, cols) {
+function updatePositions(movingPizzaElems, phaseModulator, numMovingPizzas) {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var scrollTop = document.body.scrollTop;
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTop / 1250) + (i % (cols+1)));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var scrollTop = document.body.scrollTop,
+      scaledScrollTop = scrollTop / 1250;
+  for (var i = 0; i < numMovingPizzas; i++) {
+    var phase = Math.sin(scaledScrollTop + (i % phaseModulator));
+    movingPizzaElems[i].style.left = movingPizzaElems[i].basicLeft + 100 * phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -527,9 +528,9 @@ document.addEventListener('DOMContentLoaded', function() {
       windowH = window.innerHeight,
       cols = Math.ceil(windowW / s),
       rows = Math.ceil(windowH / s),
-      pizzas = cols*rows;
+      numMovingPizzas = cols*rows;
 
-  for (var i = 0; i < pizzas; i++) {
+  for (var i = 0; i < numMovingPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -539,12 +540,12 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
-  var items = document.querySelectorAll('.mover');
+  var movingPizzaElems = document.querySelectorAll('.mover');
 
-  updatePositions(items, cols);
+  updatePositions(movingPizzaElems, cols+1, numMovingPizzas);
 
   // runs updatePositions on scroll
   window.addEventListener('scroll', function() {
-    updatePositions(items, cols);
+    updatePositions(movingPizzaElems, cols+1, numMovingPizzas);
   });
 });
