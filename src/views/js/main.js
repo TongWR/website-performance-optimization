@@ -503,6 +503,11 @@ function updatePositions(movingPizzaElems, phaseModulator, numMovingPizzas) {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  /*  To make the page render faster,
+      we avoid doing unnecessary work repeatedly
+      by moving DOM access and other calculations
+      out of loop as much as possible.
+  */
   var scrollTop = document.body.scrollTop,
       scaledScrollTop = scrollTop / 1250;
   for (var i = 0; i < numMovingPizzas; i++) {
@@ -526,9 +531,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var body = document.getElementsByClassName('container')[0],
       windowW = window.innerWidth,
       windowH = window.innerHeight,
-      cols = Math.ceil(windowW / s),
-      rows = Math.ceil(windowH / s),
-      numMovingPizzas = cols*rows;
+      cols = Math.ceil(windowW / s),    // To make the page render faster,
+      rows = Math.ceil(windowH / s),    // we reduce the number of DOM elements involved
+      numMovingPizzas = cols*rows;      // by deciding # of moving pizzas from page size.
+
 
   for (var i = 0; i < numMovingPizzas; i++) {
     var elem = document.createElement('img');
